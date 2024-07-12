@@ -1,0 +1,17 @@
+@PACKAGE_INIT@
+
+
+# Include the exported CMake file
+get_filename_component(component2_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+
+include(CMakeFindDependencyMacro)
+find_dependency(Component1)
+
+
+
+if(NOT TARGET component2::component2)
+    include("${CMAKE_CURRENT_LIST_DIR}/Component2Targets.cmake")
+endif()
+
+check_required_components(component2)

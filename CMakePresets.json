@@ -1,0 +1,47 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 1
+    },
+    "configurePresets": [
+        {
+            "name": "Debug",
+            "hidden": false,
+            "description": "Debug configuration",
+            "displayName": "Custom configure preset",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "LOG_VERBOSITY": "SPDLOG_LEVEL_DEBUG",
+                "COMPILATION_FLAGS": "-ggdb -Wall -Wextra -Wconversion -Wno-sign-conversion -Wpedantic -Wnon-virtual-dtor -Woverloaded-virtual -Wreorder -Wuninitialized -fsanitize=undefined",
+                "LINK_SANITIZER": "ubsan",
+                "LINK_FLAGS": "-fsanitize=undefined",
+                "ENABLE_LINKER_LTO": false
+            }
+        },
+        {
+            "name": "Debug-aarch64",
+            "hidden": false,
+            "description": "Debug configuration for ARM AARCH64",
+            "inherits": "Debug",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/aarch64-toolchain.cmake"
+        },
+        {
+            "name": "Release",
+            "hidden": false,
+            "description": "Release configuration",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "LOG_VERBOSITY": "SPDLOG_LEVEL_OFF",
+                "COMPILATION_FLAGS": "-O2 -ggdb -Wall -Wextra -Wconversion -Wno-sign-conversion -Wpedantic -Wnon-virtual-dtor -Woverloaded-virtual -Wreorder -Wuninitialized",
+                "LINK_SANITIZER": "",
+                "LINK_FLAGS": "",
+                "ENABLE_LINKER_LTO": true
+            }
+        }
+    ]
+}

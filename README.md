@@ -1,2 +1,5 @@
 # modern-cmake-template
-Custom template for cmake
+
+Custom template for cmake projects
+
+
